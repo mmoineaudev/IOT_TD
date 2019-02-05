@@ -27,4 +27,20 @@ On utilise : wifiscan.ino
 
 - Connexion
 
-On utilise : wificonnect.ino
+On utilise : wificonnect.ino	
+
+- Un client Http
+
+On utilise : 
+
+wifihttp_getonly0.ino
+
+wifihttp_getonly1.ino
+
+- Un autre client Http
+
+https://github.com/espressif/arduino-esp32/tree/master/libraries/HTTPClient/examples
+
+- 5 - Controller le circuit par une page web 
+
+Réutiliser le code python mais passer par des formulaires
