@@ -11,8 +11,8 @@ void print_ip_status(){
 }
 
 void connect_wifi(){
- const char* ssid = "HUAWEI-6EC2";
- const char *password= "FGY9MLBL"; 
+ const char* ssid = "NetworkComesWithFaith";
+ const char *password= "0987654321"; 
 
  Serial.println("Connecting Wifi...");
  WiFi.begin(ssid, password);

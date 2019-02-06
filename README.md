@@ -157,6 +157,33 @@ Received data ...
 
 - wifihttp_getonly1.ino
 
+```
+IOT_TD$ python3 readserial.py
+Attempting to connect ..
+Connected to local Wifi
+WiFi connected
+IP address: 192.168.43.227
+MAC address: 30:AE:A4:86:62:F4
+
+
+connecting...
+HTTP/1.1 200 OK
+Connection: close
+Server: gunicorn/19.9.0
+Date: Wed, 06 Feb 2019 14:16:11 GMT
+Content-Type: application/json
+Content-Length: 31
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+Via: 1.1 vegur
+
+{
+  "origin": "37.173.52.71"
+}
+
+
+```
+
 ### Un autre client Http
 
 https://github.com/espressif/arduino-esp32/tree/master/libraries/HTTPClient/examples
