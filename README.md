@@ -186,8 +186,26 @@ Via: 1.1 vegur
 
 ### Un autre client Http
 
-https://github.com/espressif/arduino-esp32/tree/master/libraries/HTTPClient/examples
+https://github.com/espressif/arduino-esp32/tree/master/libraries/HTTPClient/examples/HTTPClient/BasicHTTPClient.ino
 
-### 5 - Controller le circuit par une page web
+```
+IOT_TD$ python3 readserial.py
+[SETUP] WAIT 2...
+[SETUP] WAIT 1...
 
-Réutiliser le code python mais passer par des formulaires
+
+
+
+
+[HTTP] begin...
+[HTTP] GET...
+[HTTP] GET... code: 200
+{
+  "origin": "37.173.133.223"
+}
+
+```
+
+### Controller le circuit par une page web
+
+On va tenter d'allumer une diode via une action sur une page web hébergée par le arduino
