@@ -105,8 +105,13 @@ void setup() {
 }
 
 void loop() {
+  String HTTP_req;
+  //the light sensor value
+  int sensorValue = analogRead(A0);
+  //Serial.println(sensorValue);
   // listen for incoming clients
   WiFiClient client = server.available();
+  //Serial.println(client);//seems there is no client 
   if (client) {
     String req = "";
     // an http request ends with a blank line
@@ -135,7 +140,8 @@ void loop() {
           break;
         } else if (c == '\n') { // you're starting a new line
           currentLineIsBlank = true;
-        } else if (c != '\r') { // you've gotten a character on the current line
+        } else if (c != '\r') {
+          // you've gotten a character on the current line
           currentLineIsBlank = false;
         }
       }
