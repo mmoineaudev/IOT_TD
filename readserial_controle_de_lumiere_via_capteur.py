@@ -18,6 +18,15 @@ while 1:
  x = x.rstrip()
  x = x.decode("utf-8")
 
- print ("{}".format(x))
+ print ("Valeur : {}".format(x))
 
+ #On ecrit 
+ if int(x) < 900 :
+    print ("light")
+    ser.write(b'1')
+ else:
+    print ("nolight")
+    ser.write(b'2')
+
+#    ser.flush()
  
