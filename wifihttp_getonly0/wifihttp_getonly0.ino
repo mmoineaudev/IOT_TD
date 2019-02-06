@@ -12,8 +12,8 @@ void print_ip_status(){
 }
 
 void connect_wifi(){
- const char* ssid = "HUAWEI-6EC2";
- const char *password= "FGY9MLBL"; 
+ const char* ssid = "NetworkComesWithFaith";
+ const char *password= "0987654321"; 
  
  Serial.println("\nConnecting Wifi...");
  WiFi.begin(ssid, password);
@@ -25,13 +25,7 @@ void connect_wifi(){
  print_ip_status();
 }
 
-
-void setup(){ 
-  Serial.begin(9600);
-  while (!Serial); // wait for a serial connection
-
-  connect_wifi();
-
+void get_from_serv(){
   // configure targeted server and url  
   HTTPClient serv;
   const char* url_serv_name = "http://httpbin.org/ip";
@@ -40,18 +34,33 @@ void setup(){
 
   // start connection and send HTTP header
   int HttpRetCode=serv.GET();
-  
   if (HttpRetCode > 0){
       // HTTP header has been send and Server response header has been handled
       Serial.print("Received data ...");
       String Contents = serv.getString();
+      Serial.print("\n");
       Serial.print(HttpRetCode);
       Serial.print("\n");
       Serial.print(Contents);
       Serial.print("\n");
       
       serv.end(); // End connection
+    }else{
+      
+      Serial.print("\n");
+      
+      Serial.print("Fail : retCode : ");
+      Serial.print(HttpRetCode);
     }
+}
+
+void setup(){ 
+  Serial.begin(9600);
+  while (!Serial); // wait for a serial connection
+
+  connect_wifi();
+
+  get_from_serv();
 }
 
 void loop(){

@@ -91,7 +91,7 @@ IOT_TD$ python3 readserial.py
 
 ```
 
-- Connexion
+### Connexion
 
 On utilise : wificonnect.ino
 
@@ -111,7 +111,7 @@ MAC address: 30:AE:A4:86:62:F4
 
 ```
 
-- Sockets
+### Sockets
 
 ```
 < on a pas le temps >
@@ -134,18 +134,33 @@ MAC address: 30:AE:A4:86:62:F4
 
 ```
 
-- Un client Http
+### Un client Http
 
 On utilise :
 
-wifihttp_getonly0.ino
+- wifihttp_getonly0.ino
 
-wifihttp_getonly1.ino
+```
 
-- Un autre client Http
+IOT_TD$ python3 readserial.py
+Connected to local Wifi
+WiFi connected
+IP address: 192.168.43.227
+MAC address: 30:AE:A4:86:62:F4
+Received data ...
+200
+{
+  "origin": "37.173.133.223"
+}
+
+```
+
+- wifihttp_getonly1.ino
+
+### Un autre client Http
 
 https://github.com/espressif/arduino-esp32/tree/master/libraries/HTTPClient/examples
 
-- 5 - Controller le circuit par une page web
+### 5 - Controller le circuit par une page web
 
 Réutiliser le code python mais passer par des formulaires
