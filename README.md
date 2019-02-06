@@ -95,6 +95,45 @@ IOT_TD$ python3 readserial.py
 
 On utilise : wificonnect.ino
 
+```
+python3 readserial.py
+WiFi connected
+IP address: 192.168.43.227
+MAC address: 30:AE:A4:86:62:F4
+
+WiFi connected
+IP address: 192.168.43.227
+MAC address: 30:AE:A4:86:62:F4
+
+WiFi connected
+IP address: 192.168.43.227
+MAC address: 30:AE:A4:86:62:F4
+
+```
+
+- Sockets
+
+```
+< on a pas le temps >
+ -------------------
+    \                                  ___-------___
+     \                             _-~~             ~~-_
+      \                         _-~                    /~-_
+             /^\__/^\         /~  \                   /    \
+           /|  O|| O|        /      \_______________/        \
+          | |___||__|      /       /                \          \
+          |          \    /      /                    \          \
+          |   (_______) /______/                        \_________ \
+          |         / /         \                      /            \
+           \         \^\\         \                  /               \     /
+             \         ||           \______________/      _-_       //\__//
+               \       ||------_-~~-_ ------------- \ --/~   ~\    || __/
+                 ~-----||====/~     |==================|       |/~~~~~
+                  (_(__/  ./     /                    \_\      \.
+                         (_(___/                         \_____)_)
+
+```
+
 - Un client Http
 
 On utilise :
