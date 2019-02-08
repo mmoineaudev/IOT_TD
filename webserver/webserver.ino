@@ -36,20 +36,36 @@ void httpReply(WiFiClient client) {
    client.println();
    client.println("<!DOCTYPE HTML>");
    client.println("<html>");    
-   printHTML(client)
-   client.println("</html>"); 
+   printHTML(client);
+   client.println("</html>");
+   printJS(client);
 }
 
 void printHTML(WiFiClient client){
-  int tempValue; 
+  int tempValue=999; 
   client.print("<h2>température du batiment : ");
   client.print(tempValue);
   client.print(" degrés</h2>");
   
-  int lightValue; 
+  int lightValue=888; 
   client.print("<h2>luminosité du batiment : ");
   client.print(lightValue);
   client.print(" lumens</h2>");
+
+
+  client.print("<button onclick='onoff()'>on/off</button>");
+}
+void printJS(WiFiClient client){
+  client.print("<script>");
+  client.print("function onoff(){");
+  client.print("console.log(\"on/off\");");
+  client.print("var ip = location.hostname;");
+  client.print("var xmlHttp = new XMLHttpRequest();");
+  client.print("xmlHttp.open( \"GET\", ip, false );"); // false for synchronous request
+  client.print("xmlHttp.send( '0' );");
+  client.print("return xmlHttp.responseText;");
+  client.print("}");
+  client.print("</script>");
 }
 
 void setup(){ 
@@ -83,6 +99,9 @@ void loop() {
           currentLineIsBlank = true;
         } else if (c != '\r') { // you've gotten a character on the current line
           currentLineIsBlank = false;
+          if(c=='0') {
+
+          }
         }
       }
     }
