@@ -19,6 +19,8 @@ int lightValue = 0;
 //OneWire oneWire(TEMP_PIN);
 //DallasTemperature tempSensor(&oneWire);
 
+bool led_on = true;
+
 //***********************
 //Connexion wifi
 void connect_wifi() {
@@ -116,9 +118,10 @@ void loop() {
           Serial.write("\n");
           client.println("HTTP/1.1 200 OK");
           if (req.indexOf("ON") > -1) {
-            //on allume la diode
+            led_on = true;
           } else if (req.indexOf("OFF") > -1) {
-            //on eteint la diode
+            led_on = false;
+
           } else {
             Serial.write("\nHTTP reply\n");
             httpReply(client);
@@ -132,6 +135,8 @@ void loop() {
       }
     }
     // give the web browser time to receive the data
+    if (led_on) digitalWrite(LED_PIN, HIGH);
+    else       digitalWrite(LED_PIN, LOW);
     delay(100); // ms
     // close the connection :
     client.stop();
