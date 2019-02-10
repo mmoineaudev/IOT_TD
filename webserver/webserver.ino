@@ -1,3 +1,4 @@
+
 #include <WiFi.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
@@ -5,17 +6,18 @@
 //les branchements
 #define LED_PIN 23
 #define TEMP_PIN 19
+#define LIGTH_PIN 34
 //le web server
-WiFiServer server(80); 
+WiFiServer server(80);
 //les id de la wifi
 const char* ssid = "NetworkComesWithFaith";
 const char* password = "0987654321";
 //les var globales
-int tempValue = 0;
+//int tempValue = 0;
 int lightValue = 0;
 //la récupération de la température
-OneWire oneWire(TEMP_PIN);
-DallasTemperature tempSensor(&oneWire);
+//OneWire oneWire(TEMP_PIN);
+//DallasTemperature tempSensor(&oneWire);
 
 //***********************
 //Connexion wifi
@@ -42,7 +44,7 @@ void print_status() {
 void httpReply(WiFiClient client) {
   client.println("Content-Type: text/html");
   client.println("Connection: close");  // the connection will be closed after completion of the response
-  client.println("Refresh: 10");         // refresh the page automatically every 5 sec
+  client.println("Refresh: 2");         // refresh the page automatically every 5 sec
   client.println();
   client.println("<!DOCTYPE HTML>");
   client.println("<html>");
@@ -51,21 +53,21 @@ void httpReply(WiFiClient client) {
   printJS(client);
 }
 void printHTML(WiFiClient client) {
-  lightValue = analogRead(A0);
-  tempSensor.requestTemperaturesByIndex(0);
-  tempValue = tempSensor.getTempCByIndex(0);
+  lightValue = analogRead(LIGTH_PIN);
+  //tempSensor.requestTemperaturesByIndex(0);
+  //tempValue = tempSensor.getTempCByIndex(0);
 
   client.print("<h3>IP du client :");
   client.print(WiFi.localIP());
   client.print("</h3>");
   client.print("<p>température du batiment : ");
   client.print("<span id=\"temp\">");
-  client.print(tempValue);
+  //client.print(tempValue);
   client.print("</span>");
   client.print(" degrés</p></br>");
   client.print("<p>luminosité du batiment : ");
   client.print("<span id=\"light\">");
-  client.print(lightSensorValue);
+  client.print(lightValue);
   client.print(" lumens </p>");
   client.print("<button onclick = 'diode(\"ON\")'> on </button > ");
   client.print("<button onclick = 'diode(\"OFF\")'> off </button > ");
@@ -74,9 +76,9 @@ void printHTML(WiFiClient client) {
 void printJS(WiFiClient client) {
   client.print("<script>");
   client.print("function diode(on_off) {\n");//on_off vaut ON ou OFF
-  client.print("console.log(on);\n");
+  client.print("console.log(on_off);\n");
   client.print("var xmlhttp = new XMLHttpRequest();\n");
-  client.print("xmlhttp.open(\"GET\", on, true);\n");
+  client.print("xmlhttp.open(\"GET\", on_off, true);\n");
   client.print("xmlhttp.send();\n");
   client.print("}\n");
   client.print("</script>");
@@ -90,8 +92,8 @@ void setup() {
   connect_wifi(); // Connexion Wifi
   server.begin(); // Lancement du serveur
   pinMode(LED_PIN, OUTPUT);
-    tempSensor.begin();
-  
+  //    tempSensor.begin();
+
 }
 
 void loop() {
@@ -115,7 +117,7 @@ void loop() {
           client.println("HTTP/1.1 200 OK");
           if (req.indexOf("ON") > -1) {
             //on allume la diode
-          }else if (req.indexOf("OFF") > -1) {
+          } else if (req.indexOf("OFF") > -1) {
             //on eteint la diode
           } else {
             Serial.write("\nHTTP reply\n");
