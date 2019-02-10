@@ -135,8 +135,10 @@ void loop() {
       }
     }
     // give the web browser time to receive the data
+    
     if (led_on) digitalWrite(LED_PIN, HIGH);
     else       digitalWrite(LED_PIN, LOW);
+    
     delay(100); // ms
     // close the connection :
     client.stop();
