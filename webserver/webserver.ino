@@ -13,11 +13,11 @@ WiFiServer server(80);
 const char* ssid = "NetworkComesWithFaith";
 const char* password = "0987654321";
 //les var globales
-//int tempValue = 0;
+int tempValue = 0;
 int lightValue = 0;
 //la récupération de la température
-//OneWire oneWire(TEMP_PIN);
-//DallasTemperature tempSensor(&oneWire);
+OneWire oneWire(TEMP_PIN);
+DallasTemperature tempSensor(&oneWire);
 
 bool led_on = true;
 
@@ -45,10 +45,12 @@ void print_status() {
 //http
 void httpReply(WiFiClient client) {
   client.println("Content-Type: text/html");
+  
   client.println("Connection: close");  // the connection will be closed after completion of the response
   client.println("Refresh: 2");         // refresh the page automatically every 5 sec
   client.println();
   client.println("<!DOCTYPE HTML>");
+  client.println("<meta charset=\"UTF-8\">");
   client.println("<html>");
   printHTML(client);
   client.println("</html>");
@@ -56,21 +58,25 @@ void httpReply(WiFiClient client) {
 }
 void printHTML(WiFiClient client) {
   lightValue = analogRead(LIGTH_PIN);
-  //tempSensor.requestTemperaturesByIndex(0);
-  //tempValue = tempSensor.getTempCByIndex(0);
+  tempSensor.requestTemperaturesByIndex(0);
+  tempValue = tempSensor.getTempCByIndex(0);
 
   client.print("<h3>IP du client :");
   client.print(WiFi.localIP());
   client.print("</h3>");
   client.print("<p>température du batiment : ");
   client.print("<span id=\"temp\">");
-  //client.print(tempValue);
+  client.print(tempValue);
   client.print("</span>");
   client.print(" degrés</p></br>");
   client.print("<p>luminosité du batiment : ");
   client.print("<span id=\"light\">");
   client.print(lightValue);
   client.print(" lumens </p>");
+
+  client.print(" <p>La diode est  ");
+  client.print(led_on?"allumée":"éteinte");
+  client.print("</p>");
   client.print("<button onclick = 'diode(\"ON\")'> on </button > ");
   client.print("<button onclick = 'diode(\"OFF\")'> off </button > ");
 }
@@ -94,7 +100,7 @@ void setup() {
   connect_wifi(); // Connexion Wifi
   server.begin(); // Lancement du serveur
   pinMode(LED_PIN, OUTPUT);
-  //    tempSensor.begin();
+  tempSensor.begin();
 
 }
 
@@ -123,7 +129,7 @@ void loop() {
             led_on = false;
 
           } else {
-            Serial.write("\nHTTP reply\n");
+            //Serial.write("\nHTTP reply\n");
             httpReply(client);
           }
           break;
