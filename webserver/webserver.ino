@@ -45,6 +45,7 @@ void print_status() {
 //http
 void httpReply(WiFiClient client) {
   client.println("Content-Type: text/html");
+  
   client.println("Connection: close");  // the connection will be closed after completion of the response
   client.println("Refresh: 2");         // refresh the page automatically every 5 sec
   client.println();
@@ -63,11 +64,6 @@ void printHTML(WiFiClient client) {
   client.print("<h3>IP du client :");
   client.print(WiFi.localIP());
   client.print("</h3>");
-
-  client.print("<h3>Localisation des capteurs du client :");
-  client.print("<span id='localisation'>no sé</span>");
-  client.print("</h3>");
-
   client.print("<p>température du batiment : ");
   client.print("<span id=\"temp\">");
   client.print(tempValue);
@@ -79,7 +75,7 @@ void printHTML(WiFiClient client) {
   client.print(" lumens </p>");
 
   client.print(" <p>La diode est  ");
-  client.print(led_on ? "allumée" : "éteinte");
+  client.print(led_on?"allumée":"éteinte");
   client.print("</p>");
   client.print("<button onclick = 'diode(\"ON\")'> on </button > ");
   client.print("<button onclick = 'diode(\"OFF\")'> off </button > ");
@@ -93,14 +89,7 @@ void printJS(WiFiClient client) {
   client.print("xmlhttp.open(\"GET\", on_off, true);\n");
   client.print("xmlhttp.send();\n");
   client.print("}\n");
-
-  client.print("function getip(response)\n");
-  client.print("{\n");
-  client.print("document.getElementById('localisation').innerHTML = response.city");
-  client.print("}\n");
   client.print("</script>");
-  client.print("<script type=\"application/javascript\" src=\"http://jsonip.appspot.com/?callback=getip\"></script>");
-
 }
 
 //*********************************
@@ -152,10 +141,10 @@ void loop() {
       }
     }
     // give the web browser time to receive the data
-
+    
     if (led_on) digitalWrite(LED_PIN, HIGH);
     else       digitalWrite(LED_PIN, LOW);
-
+    
     delay(100); // ms
     // close the connection :
     client.stop();
