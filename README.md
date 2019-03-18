@@ -205,26 +205,3 @@ IOT_TD$ python3 readserial.py
 }
 
 ```
-
-### Controller le circuit par une page web
-
-On a donc démontré qu’il était possible de dialoguer "Http" avec ces objets.
-Vous devez vous approprier ces exemples, puis mettre en place une page Web (ou plusieurs) qui permettra
-de contrôler vos objets.
-Quelques remarques sur la notion de "contrôle" :
-
-- Je placerais bien ce travail dans un contexte de surveillance de la régulation de température d’un
-  bâtiment,
-- Vous avez "carte blanche" sur l’architecture, serveur Web coté PC ou coté ESP ou les deux ou ... ? ? ?
-
-- Langage/techno de votre choix (PHP, Javascript, Python . . . ).
-
-- En tant qu’utilisateur (assis devant ma page Web), il est certain que j’aimerais pouvoir accéder aux
-  valeurs des capteurs présents sur l’objet, à l’instant présent, mais éventuellement dans le passé.
-
-- Je veux aussi pouvoir intervenir sur les "actionneurs" (représentés par des LED) . . .
-
-- Vous commencerez sans doute par raisonner/travailler sur un seul objet, n’oubliez pas dans ce que vous
-  mettez en place qu’il peut y en avoir plusieurs . . .
-
-On part de webserver.ino ( source : https://www.arduino.cc/en/Tutorial/WebServer )
